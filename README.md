@@ -20,7 +20,14 @@ LED的颜色与目录对应如下。其他型号的板子或系统，如果目�
 | 紫色  | 无用户登录时，CPU负载大于50% |
 
 ## 安装脚本
-
+```
+curl -o /path/to/leds.sh https://raw.fastgit.org/yaaprogrammer/stick-leds/main/leds.sh
+chmod 755 /path/to/leds.sh
+curl -o /usr/lib/systemd/system/leds.service https://raw.fastgit.org/yaaprogrammer/stick-leds/main/leds.service
+sudo systemctl enable leds.service --now
+```
+上述命令以及`leds.service`文件中的`/path/to/leds.sh`自行替换为你想要的目录
 ## 其他功能
 - 判断CPU负载高低的阈值为50%，可以在`leds.sh`中修改变量`threshold`的值
 - `leds.service`可配置关闭LED灯，将`Environment=LED_OFF=0`修改为`Environment=LED_OFF=1`即可，之后重启systemd守护进程，`sudo systemctl daemon-reload`
+- 每2秒运行一次脚本，可以在`leds.service`中配置运行间隔`RestartSec=2`
