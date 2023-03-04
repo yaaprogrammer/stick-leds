@@ -1,0 +1,10 @@
+[Unit]
+Description=leds script
+
+[Service]
+ExecStart=/root/scripts/leds.sh
+Restart=always
+RestartSec=2
+Environment=LED_OFF=0
+[Install]
+WantedBy=multi-user.target
